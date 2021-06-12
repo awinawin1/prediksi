@@ -36,11 +36,11 @@ class KlasifikasiController extends Controller
     }
 
     public function viewData($namaFile){
-        $command = escapeshellcmd("python ".public_path("code/simpleView.py")." ".public_path("uploaded/".$namaFile));
+        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".public_path("uploaded/".$namaFile));
 
         $output = shell_exec($command);
         $m = array('msg' => $output);
-    	echo json_encode($output);
+        print_r($output);
     }
 
     public function klasifikasi($namaFile){
@@ -51,9 +51,9 @@ class KlasifikasiController extends Controller
         //        echo json_encode($m);
         //        return;
         //     }
-        $command = escapeshellcmd("python ".public_path("code/simpleCrop.py")." ". $namaFile);
+        $command = escapeshellcmd("python3 ".public_path("code/simpleCrop.py")." ". $namaFile);
         $output = shell_exec($command);
-        echo json_encode($output);
+        print_r($output);
 
 
         // echo(public_path("uploaded/".$namaFile));

@@ -69,7 +69,9 @@ Route::group(['middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
-Route::get('form-upload',  [KlasifikasiController::class, 'index'])->name('index');
+
+// Klasifikasi
+Route::get('/form-upload',  [KlasifikasiController::class, 'index'])->name('form-upload');
 
 Route::post('/upload', [KlasifikasiController::class, 'upload'])->name('upload');
 
