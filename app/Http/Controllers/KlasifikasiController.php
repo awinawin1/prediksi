@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class KlasifikasiController extends Controller
 {
     public function index(){
-        return view('v_upload');
+        return view('v_uploadKlasifikasi');
     }
     public function upload(Request $request){
         $this->validate($request, [

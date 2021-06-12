@@ -17,14 +17,15 @@
             <p>{{ __('Dashboard') }}</p>
         </a>
       </li>
+      <!-- Dropdown Prediksi -->
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+        <a class="nav-link" data-toggle="collapse" href="#prediksiDropdown" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
           <p>{{ __('Prediksi') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="laravelExample">
+        <div class="collapse show" id="prediksiDropdown">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('home') }}">
@@ -41,19 +42,45 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ ($activePage == 'form-upload' || $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#laravelExample" aria-expanded="true">
+      <!-- Dropdown klasifikasi -->
+      <li class="nav-item {{ ($activePage == 'form-upload') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#klasifikasiDropdown" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
           <p>{{ __('Klasifikasi') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse show" id="laravelExample">
+        <div class="collapse show" id="klasifikasiDropdown">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'form-upload' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('form-upload') }}">
+            <li class="nav-item{{ $activePage == 'uploadKlasifikasi' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('uploadKlasifikasi') }}">
                 <span class="sidebar-mini"> UP </span>
                 <span class="sidebar-normal">{{ __('Upload File Klasifikasi') }} </span>
+              </a>
+            </li>
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('user.index') }}">
+                <span class="sidebar-mini"> UM </span>
+                <span class="sidebar-normal"> {{ __('History') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- Dropdown Spektogram -->
+      <li class="nav-item {{ ($activePage == 'uploadSpektogram' || $activePage == 'user-management') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#spektogramDropdown" aria-expanded="true">
+          <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
+          <p>{{ __('Spektogram') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="spektogramDropdown">
+          <ul class="nav">
+            <li class="nav-item{{ $activePage == 'uploadSpektogram' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('uploadSpektogram') }}">
+                <span class="sidebar-mini"> UP </span>
+                <span class="sidebar-normal">{{ __('Upload File Spektogram') }} </span>
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">

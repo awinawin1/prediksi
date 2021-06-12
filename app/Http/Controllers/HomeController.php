@@ -29,7 +29,7 @@ class HomeController extends Controller
         $data = [
             'interictal'=>$this->Interictal->getData(),
         ];
-        return view('dashboard',$data);
+        return view('v_uploadPrediksi',$data);
        
         
     }

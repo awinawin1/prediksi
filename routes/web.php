@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\SpektogramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,13 +72,16 @@ Auth::routes();
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
 // Klasifikasi
-Route::get('/form-upload',  [KlasifikasiController::class, 'index'])->name('form-upload');
-
+Route::get('/form-upload',  [KlasifikasiController::class, 'index'])->name('uploadKlasifikasi');
 Route::post('/upload', [KlasifikasiController::class, 'upload'])->name('upload');
-
 Route::get('/view-data/{namaFile}', [KlasifikasiController::class, 'viewData'])->name('viewData');
-
 Route::get('/klasifikasi/{namaFile}', [KlasifikasiController::class, 'klasifikasi'])->name('klasifikasi');
+
+// Spektogram
+Route::get('/uploadSpektogram',  [SpektogramController::class, 'index'])->name('uploadSpektogram')->middleware('auth');
+Route::post('/uploadFileSpektogram', [SpektogramController::class, 'upload'])->name('uploadFileSpektogram');
+Route::get('/view-dataSpektogram/{namaFile}', [SpektogramController::class, 'viewData'])->name('viewDataSpektogram');
+Route::get('/spektogram/{namaFile}', [SpektogramController::class, 'spektogram'])->name('spektogram');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('table-list', function () {
