@@ -12,8 +12,8 @@ import sys
 import mne 
 from pywt import wavedec
 
-pathDataSet = "C:\\xampp\\htdocs\\prediksi\\public\\uploaded\\"
-
+pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploaded/"
+#pathDataSet =
 
 def data_load(FILE, selected_channels=[]):    
     fullNm = pathDataSet + FILE
@@ -161,9 +161,11 @@ def getFeatureStatWithWavelet(signal,numCH,waveName,level):
   
 if __name__ == '__main__':
     FILE=sys.argv[1]
+    segmen=[]
     #FILE = 'chb23_07.edf'
-    print(FILE)
-    loaded = np.load("channel_keeps.npz")
+    # print(FILE)
+    loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/channel_keeps.npz")
+    #loaded =
     selected_channels =loaded['channel_keeps'] 
     
     raw = loadAndFiltering(FILE,selected_channels)
@@ -180,7 +182,8 @@ if __name__ == '__main__':
     oneData  = oneData.reshape(1,oneData.shape[0],oneData.shape[1])
     KELAS    = 3
     model    = create_modelCNN(oneData.shape,KELAS)#,False)
-    nmModel  = 'modelCNN_fold_1.h5'
+    nmModel  = '/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/modelCNN_3.h5'
+    # nmModel =
     model.load_weights(nmModel)    
     # print(oneData.shape) 
     cnt=0
@@ -200,8 +203,11 @@ if __name__ == '__main__':
             hasil = "Interiktal"
         else:
             hasil = "Iktal"
-        print("segment=%d prediksi=%s  "%(idx,hasil))
+        segmen.append(hasil)
+        # print("segment=%d prediksi=%s <br>"%(idx,hasil))
         cnt+=1
-        if cnt>5:
+        if cnt>300:
             break
+    print(segmen)
+    
         

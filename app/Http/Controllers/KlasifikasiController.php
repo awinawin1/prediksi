@@ -26,9 +26,7 @@ class KlasifikasiController extends Controller
         $tujuan_upload = 'uploaded';
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
-            echo "Upload berhasil!<br/>";
-            echo "View Data: <a href='" .route('viewData', ['namaFile' => $namaFile])."'> Klik disini</a>";
-            echo "<br>Klasifikasi Data: <a href='" .route('klasifikasi', ['namaFile' => $namaFile])."'> Klik disini</a>";
+            return view('klasifikasidata',['namaFile' => $namaFile]);
         }
         else {
             echo "Upload Gagal!";
@@ -44,23 +42,26 @@ class KlasifikasiController extends Controller
     }
 
     public function klasifikasi($namaFile){
-        // $image_name = public_path("uploaded/".$namaFile);
-
-        // if (!file_exists($image_name)) {
-        //        $m=array('msg' => "REJECTED, file tidak ada");
-        //        echo json_encode($m);
-        //        return;
-        //     }
         $command = escapeshellcmd("python3 ".public_path("code/simpleCrop.py")." ". $namaFile);
         $output = shell_exec($command);
-        print_r($output);
-
-
-        // echo(public_path("uploaded/".$namaFile));
-        // $output = shell_exec($command);
-
-        // echo json_encode(array($output));
-        // echo 'haha';
-
+        $output = str_replace("'","",$output);
+        $output = str_replace("[","",$output);
+        $output = str_replace("]","",$output);
+        $output = explode(",",$output);
+        $output = str_replace("\n","",$output);
+        $output = str_replace(" ","",$output);
+        $arrayKlasifikasi = [];
+        $segmen = [];
+        for($x=0; $x < count($output);$x++){
+            array_push($segmen,(string)$x);
+            if($output[$x]=="Normal"){
+                array_push($arrayKlasifikasi,"1");
+            } elseif ($output[$x]=="Interiktal") {
+                array_push($arrayKlasifikasi,"2");
+            } else {
+                array_push($arrayKlasifikasi,"3");
+            }
+        }
+        return view('cropKlasifikasi',['arrayKlasifikasi'=>$arrayKlasifikasi,'segmen'=>$segmen]);
     }
 }

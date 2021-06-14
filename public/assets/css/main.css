@@ -1,0 +1,51 @@
+.news-kompas { 
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #e8541f;
+ }
+
+ .news-tribun { 
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #2d6da4;
+ }
+
+
+.div-gambar{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	position: relative;
+}
+
+.news-title a{
+	text-decoration: none;
+	color: black;
+}
+.news-title a:hover{
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+
+.search_bar input[type="text"] {
+    position:absolute;
+    left:0%;
+    bottom:0%;
+    background-color:white;
+    color:grey;
+}
+
+#searchbar{
+	 height: 5%;
+	 width: 80%;
+     margin-left: 1%;
+     padding:15px;
+     border-radius: 10px;
+   }
+ 
+ input[type=text] {
+     -webkit-transition: width 0.15s ease-in-out;
+     transition: width 0.15s ease-in-out;
+ }

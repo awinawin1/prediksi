@@ -59,8 +59,18 @@
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
       <!-- End Google Tag Manager -->
-
-    </head>
+      <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <script src="/assets/moment.js"></script>
+    <script src="/assets/Chart.min.js"></script>
+    <script src="/assets/utils.js"></script>
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    {{-- <link href="../assets/demo/demo.css" rel="stylesheet" /> --}}
+  </head>
   <body class="clickup-chrome-ext_installed">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6"

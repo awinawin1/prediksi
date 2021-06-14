@@ -18,7 +18,7 @@
         </a>
       </li>
       <!-- Dropdown Prediksi -->
-      <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'user-management') ? ' active' : '' }}">
+      <li class="nav-item {{ ($activePage == 'uploadPrediksi' || $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#prediksiDropdown" aria-expanded="true">
           <i><img style="width:25px" src="{{ asset('material') }}/img/laravel.svg"></i>
           <p>{{ __('Prediksi') }}
@@ -27,7 +27,7 @@
         </a>
         <div class="collapse show" id="prediksiDropdown">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
+            <li class="nav-item{{ $activePage == 'uploadPrediksi' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('home') }}">
                 <span class="sidebar-mini"> UP </span>
                 <span class="sidebar-normal">{{ __('Upload File Prediksi') }} </span>

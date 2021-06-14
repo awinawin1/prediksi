@@ -19,6 +19,7 @@ class SpektogramController extends Controller
         $tujuan_upload = 'uploadedSpektogram';
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
+            return view('spektogramdata',['namaFile' => $namaFile]);
             echo "Upload berhasil!<br/>";
             echo "View Data: <a href='" .route('viewDataSpektogram', ['namaFile' => $namaFile])."'> Klik disini</a>";
             echo "<br>Klasifikasi Spektogram Data: <a href='" .route('spektogram', ['namaFile' => $namaFile])."'> Klik disini</a>";
@@ -37,7 +38,7 @@ class SpektogramController extends Controller
     }
 
     public function spektogram($namaFile){
-        $command = escapeshellcmd("python3 ".public_path("code/simpleCrop.py")." ". $namaFile);
+        $command = escapeshellcmd("python3 ".public_path("code/simpleCropPredictSpektogram.py")." ". $namaFile);
         $output = shell_exec($command);
         print_r($output);
     }

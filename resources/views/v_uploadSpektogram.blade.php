@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'uploadSpektogram', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'uploadSpektogram', 'titlePage' => __('Dashboard'), 'pageName' => 'Spektogram'])
 
 @section('content')
 	<div class="row">
