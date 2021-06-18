@@ -26,14 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $data = [
-            'interictal'=>$this->Interictal->getData(),
-        ];
-        return view('v_uploadPrediksi',$data);
-       
-        
+        return view('welcome');
     }
-
+    public function simulasi(){
+        $user= auth()->user();
+        if($user){
+            return view('dashboardSimulasi');
+        }
+        else{
+            return view('auth.login');
+        }
+    }
     public function uploadFile(Request $request){
         $request->validate([
         'file' => 'required|max:8388608'

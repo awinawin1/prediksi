@@ -20,9 +20,6 @@ class SpektogramController extends Controller
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
             return view('spektogramdata',['namaFile' => $namaFile]);
-            echo "Upload berhasil!<br/>";
-            echo "View Data: <a href='" .route('viewDataSpektogram', ['namaFile' => $namaFile])."'> Klik disini</a>";
-            echo "<br>Klasifikasi Spektogram Data: <a href='" .route('spektogram', ['namaFile' => $namaFile])."'> Klik disini</a>";
         }
         else {
             echo "Upload Gagal!";
@@ -40,6 +37,25 @@ class SpektogramController extends Controller
     public function spektogram($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/simpleCropPredictSpektogram.py")." ". $namaFile);
         $output = shell_exec($command);
-        print_r($output);
+        $output = str_replace("'","",$output);
+        $output = str_replace("[","",$output);
+        $output = str_replace("]","",$output);
+        $output = explode(",",$output);
+        $output = str_replace("\n","",$output);
+        $output = str_replace(" ","",$output);
+        $arraySpektogram = [];
+        $segmen = [];
+        for($x=0; $x < count($output);$x++){
+            array_push($segmen,(string)$x);
+            if($output[$x]=="Normal"){
+                array_push($arraySpektogram,"1");
+            } elseif ($output[$x]=="Inter") {
+                array_push($arraySpektogram,"2");
+            } else {
+                array_push($arraySpektogram,"3");
+            }
+        }
+        // return $output;
+        return view('cropSpektogram',['arraySpektogram'=>$arraySpektogram,'segmen'=>$segmen]);
     }
 }

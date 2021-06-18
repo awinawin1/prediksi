@@ -8,11 +8,11 @@
         <br>
         <h2 class="text-center my-5">Data Klasifikasi</h2>
         <div class="col-md-auto mx-auto my-5">
-          <div class="card card-chart overflow-y: scroll">
+          <div class="card card-chart">
               <div class="card-body">
                 <canvas id="chart1"></canvas>
-              <br>
-              <br>
+                <br>
+                <br>
               </div>
           </div>
         </div>
@@ -47,6 +47,12 @@
           display: false
         },
         scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+              autoSkip : false
+            }
+          }],
           yAxes: [{
             ticks: {
               beginAtZero: true,

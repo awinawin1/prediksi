@@ -206,7 +206,7 @@ if __name__ == '__main__':
         segmen.append(hasil)
         # print("segment=%d prediksi=%s <br>"%(idx,hasil))
         cnt+=1
-        if cnt>300:
+        if cnt>125:
             break
     print(segmen)
     

@@ -4,7 +4,8 @@ Created on Sat May 15 00:21:05 2021
 
 @author: marina
 """
-
+import os
+import shutil
 import pyedflib
 import numpy as np
 import pandas as pd
@@ -14,13 +15,17 @@ from pywt import wavedec
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 from scipy import signal
-
+from keras.models import Sequential
+    #importing layers
+from keras.layers import Conv2D,Flatten,Dense,MaxPooling2D    
+from tensorflow.keras.optimizers import  SGD
+# pathDataSet = "D:\\Kuliah\Tugas Akhir\chb-mit-scalp-eeg-database-1.0.0\\chb07\\"
 pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedSpektogram/"
-# pathDataSet =
+
 
 def data_load(FILE, selected_channels=[]):    
     fullNm = pathDataSet + FILE
-    #fullNm = FILE
+    # fullNm = FILE
     f = pyedflib.EdfReader(fullNm )
     n = f.signals_in_file
     signal_labels = f.getSignalLabels()
@@ -88,49 +93,66 @@ def Crop(raw):
     
     return cropData
 
-def create_modelCNN(input_shape, num_class,flatten=False):
-  from tensorflow.keras.models import Sequential
-  from tensorflow.keras.layers import Dense
-  from tensorflow.keras.backend import clear_session
-  from tensorflow.keras.optimizers import Adam
+# def create_modelCNN(input_shape, num_class,flatten=False):
+#   from tensorflow.keras.models import Sequential
+#   from tensorflow.keras.layers import Dense
+#   from tensorflow.keras.backend import clear_session
+#   from tensorflow.keras.optimizers import Adam
     
-  from tensorflow.keras.layers import Conv1D#, Input
-  from tensorflow.keras.layers import MaxPooling1D
-  from tensorflow.keras.layers import GlobalAveragePooling1D#, GlobalMaxPooling1D
-  from keras.layers import Activation,Flatten, Dropout
+#   from tensorflow.keras.layers import Conv1D#, Input
+#   from tensorflow.keras.layers import MaxPooling1D
+#   from tensorflow.keras.layers import GlobalAveragePooling1D#, GlobalMaxPooling1D
+#   from keras.layers import Activation,Flatten, Dropout
     
-  clear_session()
-  model = Sequential()
-  def add_conv_block(model, num_filters, input_shape=None):
-        if input_shape:
-            model.add(Conv1D(num_filters, kernel_size=3, activation='relu', padding='same', input_shape=input_shape))
-        else:
-            model.add(Conv1D(num_filters, kernel_size=3, activation='relu', padding='same'))
-        return model
-  model = add_conv_block(model, 128, input_shape=input_shape[1:])
-  model = add_conv_block(model, 128)
-  model.add(Dropout(0.3))  
-  model.add(MaxPooling1D(pool_size=3, # size of the window
-                        strides=2,   # factor to downsample
-                        padding='same'))
-  model.add(Dropout(0.1))
-  for i in range(2):
-    model.add(Conv1D(filters=256,kernel_size=3,padding="same",activation='relu'))
-    model.add(Dropout(0.1))
-  if flatten:
+#   clear_session()
+#   model = Sequential()
+#   def add_conv_block(model, num_filters, input_shape=None):
+#         if input_shape:
+#             model.add(Conv1D(num_filters, kernel_size=3, activation='relu', padding='same', input_shape=input_shape))
+#         else:
+#             model.add(Conv1D(num_filters, kernel_size=3, activation='relu', padding='same'))
+#         return model
+#   model = add_conv_block(model, 128, input_shape=input_shape[1:])
+#   model = add_conv_block(model, 128)
+#   model.add(Dropout(0.3))  
+#   model.add(MaxPooling1D(pool_size=3, # size of the window
+#                         strides=2,   # factor to downsample
+#                         padding='same'))
+#   model.add(Dropout(0.1))
+#   for i in range(2):
+#     model.add(Conv1D(filters=256,kernel_size=3,padding="same",activation='relu'))
+#     model.add(Dropout(0.1))
+#   if flatten:
+#     model.add(Flatten())
+#   else:
+#     model.add(GlobalAveragePooling1D())
+#   model.add(Dense(units=128,activation='relu'))
+#   model.add(Dropout(0.1))
+#   model.add(Dense(num_class))
+#   model.add(Activation('softmax'))
+#   model.compile(optimizer=Adam(0.0001), 
+#                 loss='categorical_crossentropy', 
+#                 metrics=['accuracy'])
+#   return model
+
+def modelCNN2(input_shape,nb_classes):
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=input_shape))
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D((2, 2)))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D((2, 2)))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D((2, 2)))
     model.add(Flatten())
-  else:
-    model.add(GlobalAveragePooling1D())
-  model.add(Dense(units=128,activation='relu'))
-  model.add(Dropout(0.1))
-  model.add(Dense(num_class))
-  model.add(Activation('softmax'))
-  model.compile(optimizer=Adam(0.0001), 
-                loss='categorical_crossentropy', 
-                metrics=['accuracy'])
-  return model
-
-
+    model.add(Dense(128, activation='relu'))
+    model.add(Dense(nb_classes, activation='softmax'))
+	# compile model
+    opt = SGD(lr=0.001, momentum=0.9)
+    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
+    return model
 
 def plotSpektogram(x,fs,nmFile=''):
     f, t, Sxx = signal.spectrogram(x, fs)
@@ -143,9 +165,9 @@ def plotSpektogram(x,fs,nmFile=''):
     if nmFile !='':
          #(18, 30, 3)
         # print("masuk sini")
+        plt.savefig(nmFile)
         # plt.show()
-        # plt.savefig(nmFile)
-        plt.imsave(nmFile, imgAll)
+        # plt.imsave(nmFile, imgAll)
     
     # imgAll = np.array(imgAll)# .reshape(-1,3)
     imgAll = np.array(imgAll).ravel()
@@ -154,13 +176,16 @@ def plotSpektogram(x,fs,nmFile=''):
     
 if __name__ == '__main__':
     FILE=sys.argv[1]
-    #FILE = 'D:\\Kuliah\Tugas Akhir\chb-mit-scalp-eeg-database-1.0.0\\chb24\\chb24_22.edf'
-    #FILE = 'chb01_20.edf'
+    # FILE = 'D:\\Kuliah\Tugas Akhir\chb-mit-scalp-eeg-database-1.0.0\\chb24\\chb24_22.edf'
+    # FILE = 'chb07_12.edf'
     FILE = FILE.replace("'","")
+    dir_path = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"+FILE
+    if(dir_path):
+        shutil.rmtree(dir_path)
+    os.mkdir("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"+FILE,0o777)
     loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/channel_keeps.npz")
-    #loaded =
     selected_channels =loaded['channel_keeps'] 
-    
+    segmen=[]
     raw = loadAndFiltering(FILE,selected_channels)
     
     cropData =  Crop(raw)    
@@ -168,21 +193,23 @@ if __name__ == '__main__':
     oneData  =  cropData[0]
     oneData  =  plotSpektogram(oneData,256)
     
-    oneData  = oneData.reshape(1,numCH,-1)
+    oneData  = oneData.reshape(1,numCH,-1, 3)
     KELAS    = 3
-    model    = create_modelCNN(oneData.shape,KELAS)#,False)    
+    bntk_input = (18, 30, 3)
+    model = modelCNN2(bntk_input,KELAS)
+    # model    = modelCNN2(oneData.shape,KELAS)#,False)    
     nmModel  = '/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/modelCNNSpektrogram_3.h5'
-    #nmModel =
+
     model.load_weights(nmModel)    
     cnt=0    
     
     for idx in range(cropData.shape[0]): 
         numCH   = cropData[idx].shape[0]
         oneData = cropData[idx]
-        nmFile  = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/%s_%d.png"%(FILE,idx)
-        #nmFile
+        nmFile  = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/%s/%s_%d.png"%(FILE,FILE,idx)
+        # nmFile = dir+"%s_%s.png"%(FILE,idx)
         oneData = plotSpektogram(oneData,256,nmFile)
-        oneData = oneData.reshape(1,numCH,-1)
+        oneData = oneData.reshape(1,numCH,-1, 3)
         yPred   = model.predict(oneData)
         yPred   = np.argmax(yPred,axis=1)
         if yPred[0] == 0:
@@ -192,11 +219,12 @@ if __name__ == '__main__':
         else:
             hasil = "Ictal"
             # break
-            
-        print("segment=%d prediksi=%s  <br>"%(idx,hasil))
+        segmen.append(hasil)    
+        # print("segment=%d prediksi=%s  <br>"%(idx,hasil))
         cnt+=1
-        if cnt>5:
+        if cnt>6:
             break
+    print(segmen)
         
         
     
