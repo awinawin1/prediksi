@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/simulasiEpilepsi',[HomeController::class,'simulasi'])->name('simulasiEpilepsi');
 Auth::routes();
 Route::post('/uploadfile', [HomeController::class, 'uploadFile'])->name('upload-file');
@@ -49,36 +49,6 @@ Route::get('/uploadSpektogram',  [SpektogramController::class, 'index'])->name('
 Route::post('/uploadFileSpektogram', [SpektogramController::class, 'upload'])->name('uploadFileSpektogram');
 Route::get('/view-dataSpektogram/{namaFile}', [SpektogramController::class, 'viewData'])->name('viewDataSpektogram');
 Route::get('/spektogram/{namaFile}', [SpektogramController::class, 'spektogram'])->name('spektogram');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
-
-	Route::get('typography', function () {
-		return view('pages.typography');
-	})->name('typography');
-
-	Route::get('icons', function () {
-		return view('pages.icons');
-	})->name('icons');
-
-	Route::get('map', function () {
-		return view('pages.map');
-	})->name('map');
-
-	Route::get('notifications', function () {
-		return view('pages.notifications');
-	})->name('notifications');
-
-	Route::get('rtl-support', function () {
-		return view('pages.language');
-	})->name('language');
-
-	Route::get('upgrade', function () {
-		return view('pages.upgrade');
-	})->name('upgrade');
-});
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

@@ -1,16 +1,35 @@
 @extends('layouts.app', ['activePage' => 'uploadPrediksi', 'titlePage' => __('Dashboard'), 'pageName' => 'Prediksi'])
 
 @section('content')
-    
+<style>
+  #chartWrapper{
+    position : relative;
+    overflow-x:scroll;
+    overflow-y:scroll;
+    height:300px;
+  }
+  #chartWrapper > canvas{
+    position : absolute;
+    left : 0;
+    top : 0;
+  }
+  #chartAreaWrapper{
+    width:70000px;
+  }
+  canvas{
+    width:70000px;
+    height:500px;
+  }
+</style>   
 <div class="row">
     <div class="container">
       <div class="container-fluid">
         <br>
         <h2 class="text-center my-5">Data Prediksi</h2>
         <div class="col-md-auto mx-auto my-5">
-          <div class="card card-chart">
-              <div class="card-body">
-                <canvas id="chart1"></canvas>
+          <div class="card card-chart" id="chartWrapper">
+              <div class="card-body" id="chartAreaWrapper">
+                <canvas height="250px" id="chart1"></canvas>
                 <br>
                 <br>
               </div>
@@ -43,6 +62,8 @@
         }]
       },
       options: {
+        responsive: false,
+        maintainAspectRatio: false,
         legend: {
           display: false
         },
