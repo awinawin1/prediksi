@@ -14,10 +14,10 @@
     top : 0;
   }
   #chartAreaWrapper{
-    width:70000px;
+    width:50000px;
   }
   canvas{
-    width:70000px;
+    width:50000px;
     height:500px;
   }
 </style>  

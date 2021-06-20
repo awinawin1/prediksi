@@ -60,7 +60,7 @@ class PrediksiController extends Controller
                 array_push($arrayPrediksi,"3");
             }
         }
-        // return $output;
+        return $output;
         return view('cropPrediksi',['arrayPrediksi'=>$arrayPrediksi,'segmen'=>$segmen]);
     }
 }

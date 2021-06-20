@@ -12,13 +12,14 @@
     position : absolute;
     left : 0;
     top : 0;
-  }
+  } */
   #chartAreaWrapper{
-    width:70000px;
+    width:50000px;
   }
-  canvas{
-    width:70000px;
-  }
+  /* canvas{
+    width:50000px;
+    height:500px;
+  } */
 </style>
 <div class="row">
     <div class="container">
@@ -28,7 +29,7 @@
         <div class="col-md-auto mx-auto my-5">
           <div class="card card-chart" id="chartWrapper">
               <div class="card-body" id="chartAreaWrapper">
-                <canvas height="250px" id="chart1"></canvas>
+                <canvas height="250px" width="50000px" id="chart1"></canvas>
                 <br>
                 <br>
               </div>
@@ -57,12 +58,14 @@
           borderColor: [
             'rgba(255,99,132,1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          showLine: true,
+          spanGaps: true
         }]
       },
       options: {
         responsive: false,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         legend: {
           display: false
         },
@@ -96,15 +99,12 @@
 <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
 <!-- CSS Files -->
 <!-- CSS Just for demo purpose, don't include it in your project -->
-{{-- <link href="../assets/demo/demo.css" rel="stylesheet" /> --}}
+<!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
   <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
 <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Google Maps Plugin    -->
-<!-- Place this tag in your head or just before your close body tag. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chart JS -->
 <!--  Notifications Plugin    -->
 <script src="../assets/js/plugins/bootstrap-notify.js"></script>
