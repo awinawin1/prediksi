@@ -196,7 +196,7 @@ if __name__ == '__main__':
     nmModelInter  = '/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/modelIctal.h5'
     # nmModelInter  = ''
     #KELASInter    =51
-    KELASInter    =53
+    KELASInter    =41
     modelInter    = create_modelCNN(oneData.shape,KELASInter)#,False)    
     modelInter.load_weights(nmModelInter)    
     ictal_alert = 0
@@ -229,11 +229,6 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        if cnt>250:
+        if cnt>10:
             break
     print(segmen)
-        
-        
-    
-    
-

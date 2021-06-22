@@ -53,14 +53,14 @@ class PrediksiController extends Controller
         for($x=0; $x < count($output);$x++){
             array_push($segmen,(string)$x);
             if($output[$x]=="Normal"){
-                array_push($arrayPrediksi,"1");
+                array_push($arrayPrediksi,$output[$x]);
             } elseif ($output[$x]=="Inter") {
-                array_push($arrayPrediksi,"2");
+                array_push($arrayPrediksi,$output[$x]);
             } else {
-                array_push($arrayPrediksi,"3");
+                array_push($arrayPrediksi,$output[$x]);
             }
         }
-        return $output;
+        // return $output;
         return view('cropPrediksi',['arrayPrediksi'=>$arrayPrediksi,'segmen'=>$segmen]);
     }
 }

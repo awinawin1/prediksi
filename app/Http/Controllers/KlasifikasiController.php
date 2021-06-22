@@ -59,11 +59,11 @@ class KlasifikasiController extends Controller
         for($x=0; $x < count($output);$x++){
             array_push($segmen,(string)$x);
             if($output[$x]=="Normal"){
-                array_push($arrayKlasifikasi,"1");
+                array_push($arrayKlasifikasi,$output[$x]);
             } elseif ($output[$x]=="Interiktal") {
-                array_push($arrayKlasifikasi,"2");
+                array_push($arrayKlasifikasi,$output[$x]);
             } else {
-                array_push($arrayKlasifikasi,"3");
+                array_push($arrayKlasifikasi,$output[$x]);
             }
         }
         // return $output;

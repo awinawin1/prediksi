@@ -200,9 +200,9 @@ if __name__ == '__main__':
         if yPred[0] == 0:
             hasil = "Normal"
         elif yPred[0] == 1:
-            hasil = "Interiktal"
+            hasil = "Inter"
         else:
-            hasil = "Iktal"
+            hasil = "Ictal"
         segmen.append(hasil)
         # print("segment=%d prediksi=%s <br>"%(idx,hasil))
         cnt+=1

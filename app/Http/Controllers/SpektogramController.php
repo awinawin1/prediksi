@@ -52,11 +52,12 @@ class SpektogramController extends Controller
         for($x=0; $x < count($output);$x++){
             array_push($segmen,(string)$x);
             if($output[$x]=="Normal"){
-                array_push($arraySpektogram,"1");
-            } elseif ($output[$x]=="Inter") {
-                array_push($arraySpektogram,"2");
+                array_push($arraySpektogram,$output[$x]);
+            } elseif ($output[$x]=="Interiktal") {
+                array_push($arraySpektogram,$output[$x]);
             } else {
-                array_push($arraySpektogram,"3");
+                // Ictal
+                array_push($arraySpektogram,$output[$x]);
             }
         }
         // return $output;
