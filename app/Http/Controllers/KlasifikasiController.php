@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\Models\File;
+use App\Models\Klasifikasi;
 
 class KlasifikasiController extends Controller
 {
@@ -20,10 +20,13 @@ class KlasifikasiController extends Controller
         ]);
         $file = $request->file('file');
         // $fileModel = new File;
-
         $namaFile = $file->getClientOriginalName();
         $filePath = $file->storeAs('uploaded',$namaFile,'public');
 
+        $klasifikasi = new Klasifikasi;
+        $klasifikasi->filename = $namaFile;
+        $klasifikasi->path =(string) $filePath;
+        $klasifikasi->save();
         // $fileModel->name = $fileName;
         // $fileModel->filepath = $filePath;
         // $fileModel->save();
@@ -38,7 +41,7 @@ class KlasifikasiController extends Controller
     }
 
     public function viewData($namaFile){
-        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".public_path("uploaded/".$namaFile));
+        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile);
 
         $output = shell_exec($command);
         $m = array('msg' => $output);
@@ -68,5 +71,21 @@ class KlasifikasiController extends Controller
         }
         // return $output;
         return view('cropKlasifikasi',['arrayKlasifikasi'=>$arrayKlasifikasi,'segmen'=>$segmen]);
+    }
+    public function historyDashboard()
+    {
+        //
+    }
+    public function history($namaFile){
+        $command = escapeshellcmd("python3 ".public_path("code/historyKlasifikasi.py")." ". $namaFile);
+        $output = shell_exec($command);
+        $output = str_replace("'","",$output);
+        $output = str_replace("[","",$output);
+        $output = str_replace("]","",$output);
+        $output = explode(",",$output);
+        $output = str_replace("\n","",$output);
+        $output = str_replace(" ","",$output);
+        // return $output;
+        return view('history',['output'=>$output,'namaFile'=>$namaFile]);
     }
 }

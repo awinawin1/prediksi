@@ -21,6 +21,7 @@ from keras.layers import Conv2D,Flatten,Dense,MaxPooling2D
 from tensorflow.keras.optimizers import  SGD
 # pathDataSet = "D:\\Kuliah\Tugas Akhir\chb-mit-scalp-eeg-database-1.0.0\\chb07\\"
 pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedSpektogram/"
+pathSaveData = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedSpektogram/spektogram/"
 
 
 def data_load(FILE, selected_channels=[]):    
@@ -222,8 +223,11 @@ if __name__ == '__main__':
         segmen.append(hasil)    
         # print("segment=%d prediksi=%s  <br>"%(idx,hasil))
         cnt+=1
-        if cnt>250:
+        if cnt>5:
             break
+    saveHistory = open(pathSaveData+FILE+".txt","w")
+    saveHistory.write(str(segmen))
+    saveHistory.close()
     print(segmen)
         
         

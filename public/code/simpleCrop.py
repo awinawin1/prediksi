@@ -14,7 +14,7 @@ from pywt import wavedec
 
 pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploaded/"
 #pathDataSet =
-
+pathSaveData = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploaded/klasifikasi/"
 def data_load(FILE, selected_channels=[]):    
     fullNm = pathDataSet + FILE
 
@@ -206,8 +206,9 @@ if __name__ == '__main__':
         segmen.append(hasil)
         # print("segment=%d prediksi=%s <br>"%(idx,hasil))
         cnt+=1
-        if cnt>250:
+        if cnt>50:
             break
+    saveHistory = open(pathSaveData+FILE+".txt","w")
+    saveHistory.write(str(segmen))
+    saveHistory.close()
     print(segmen)
-    
-        

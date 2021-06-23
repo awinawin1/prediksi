@@ -15,7 +15,7 @@ from sklearn.preprocessing import LabelEncoder
 
 # pathDataSet = "E:\\TA\\chb-mit-scalp-eeg-database-1.0.0\\chb24\\"
 pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedPrediksi/"
-
+pathSaveData = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedPrediksi/prediksi/"
 
 def data_load(FILE, selected_channels=[]):    
     fullNm = pathDataSet + FILE
@@ -220,7 +220,7 @@ if __name__ == '__main__':
             yPredTime=np.argmax(yPredTime,axis=1)
             time =  label_encoder.inverse_transform(yPredTime)
             ictal_alert = ictal_alert + 1
-            if ictal_alert==3:
+            if ictal_alert==2:
                 print("Ictal akan terjadi dalam waktu %g detik "%time)                
         else:
             hasil = "Ictal"
@@ -231,4 +231,7 @@ if __name__ == '__main__':
         cnt+=1
         if cnt>10:
             break
+    saveHistory = open(pathSaveData+FILE+".txt","w")
+    saveHistory.write(str(segmen))
+    saveHistory.close()
     print(segmen)

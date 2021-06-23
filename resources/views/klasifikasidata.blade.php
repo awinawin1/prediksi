@@ -8,7 +8,7 @@
             <b>View Data</b><br>
             <a href="{{route('viewData',$namaFile)}}">{{$namaFile}}</a><br>
             <b>Klasifikasi Data</b><br>
-            <a href="{{route('klasifikasi',$namaFile)}}"">{{$namaFile}}</a><br>
+            <a href="{{route('klasifikasi',$namaFile)}}">{{$namaFile}}</a><br>
         </div>
     </div>
 </div>
