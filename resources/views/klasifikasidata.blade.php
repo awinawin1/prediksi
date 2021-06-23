@@ -3,12 +3,18 @@
 @section('content')
 <div class="row">
     <div class="container">
-        <h2 class="text-center my-5">Data Klasifikasi</h2>
+        <h2 class="text-center my-5">Berhasil Upload File {{$namaFile}}</h2>
+
         <div class="col-lg-8 mx-auto my-5">
-            <b>View Data</b><br>
-            <a href="{{route('viewData',$namaFile)}}">{{$namaFile}}</a><br>
-            <b>Klasifikasi Data</b><br>
-            <a href="{{route('klasifikasi',$namaFile)}}"">{{$namaFile}}</a><br>
+
+            <div class="row">
+                <div class="col-lg-4 mx-auto my-5">
+                <a style="margin-left: 150px" class="btn btn-primary" href="{{route('viewData',$namaFile)}}">View Data</a><br>
+                </div>
+                <div class="col-lg-4 mx-auto my-5">
+                <a style="margin-left: -80px" class="btn btn-primary" href="{{route('klasifikasi',$namaFile)}}"">Klasifikasi Data</a><br>
+                </div>
+            </div>
         </div>
     </div>
 </div>
