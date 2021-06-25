@@ -12,13 +12,19 @@ class SpektogramController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('v_uploadSpektogram');
+        $message ="";
+        return view('v_uploadSpektogram',['message'=>$message]);
     }
     public function upload(Request $request){
         $this->validate($request, [
             'file' => 'required'
         ]);
         $file = $request->file('file');
+        $ext = $file->getClientOriginalExtension();
+        if($ext!="edf"){
+            $message = "Hanya Menerima File EDF";
+            return view('v_uploadSpektogram',['message'=>$message]);
+        }
         $namaFile = $file->getClientOriginalName();
         $filePath = $file->storeAs('uploadedSpektogram',$namaFile,'public');
         $spektogram = new Spektogram;
@@ -36,11 +42,12 @@ class SpektogramController extends Controller
     }
 
     public function viewData($namaFile){
-        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile);
+        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile." "."3");
 
         $output = shell_exec($command);
-        $m = array('msg' => $output);
-        print_r($output);
+        $sinyal = "uploadedSpektogram/".$namaFile.".png";
+        $kategori = "Spektogram";
+        return view('sinyal',['sinyal'=>$sinyal,'namaFile'=>$namaFile,'kategori'=>$kategori]);
     }
 
     public function spektogram($namaFile){
@@ -52,21 +59,7 @@ class SpektogramController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        $arraySpektogram = [];
-        $segmen = [];
-        for($x=0; $x < count($output);$x++){
-            array_push($segmen,(string)$x);
-            if($output[$x]=="Normal"){
-                array_push($arraySpektogram,$output[$x]);
-            } elseif ($output[$x]=="Interiktal") {
-                array_push($arraySpektogram,$output[$x]);
-            } else {
-                // Ictal
-                array_push($arraySpektogram,$output[$x]);
-            }
-        }
-        // return $output;
-        return view('cropSpektogram',['arraySpektogram'=>$arraySpektogram,'segmen'=>$segmen,'namaFile'=>$namaFile]);
+        return view('cropSpektogram',['arraySpektogram'=>$output,'namaFile'=>$namaFile]);
     }
     public function history($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/historySpektogram.py")." ". $namaFile);
@@ -84,6 +77,6 @@ class SpektogramController extends Controller
     {
         $spektogramFile = $namaFile."/".$namaFile."_".$index.".png";
         // return $url;
-        return view('imageSpektogram',['spektogramFile'=>$spektogramFile]);
+        return view('imageSpektogram',['spektogramFile'=>$spektogramFile,'namaFile'=>$namaFile,'segmen'=>$index]);
     }
 }

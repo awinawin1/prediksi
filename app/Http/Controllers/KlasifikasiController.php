@@ -12,14 +12,19 @@ class KlasifikasiController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('v_uploadKlasifikasi');
+        $message="";
+        return view('v_uploadKlasifikasi',['message'=>$message]);
     }
     public function upload(Request $request){
         $this->validate($request, [
             'file' => 'required'
         ]);
         $file = $request->file('file');
-        // $fileModel = new File;
+        $ext = $file->getClientOriginalExtension();
+        if($ext!="edf"){
+            $message = "Hanya Menerima File EDF";
+            return view('v_uploadKlasifikasi',['message'=>$message]);
+        }
         $namaFile = $file->getClientOriginalName();
         $filePath = $file->storeAs('uploaded',$namaFile,'public');
 
@@ -27,9 +32,6 @@ class KlasifikasiController extends Controller
         $klasifikasi->filename = $namaFile;
         $klasifikasi->path =(string) $filePath;
         $klasifikasi->save();
-        // $fileModel->name = $fileName;
-        // $fileModel->filepath = $filePath;
-        // $fileModel->save();
         $tujuan_upload = 'uploaded';
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
@@ -41,11 +43,12 @@ class KlasifikasiController extends Controller
     }
 
     public function viewData($namaFile){
-        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile);
+        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile." "."1");
 
         $output = shell_exec($command);
-        $m = array('msg' => $output);
-        print_r($output);
+        $sinyal = "uploaded/".$namaFile.".png";
+        $kategori = "Klasifikasi";
+        return view('sinyal',['sinyal'=>$sinyal,'namaFile'=>$namaFile,'kategori'=>$kategori]);
     }
 
     public function klasifikasi($namaFile){
@@ -57,20 +60,7 @@ class KlasifikasiController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        $arrayKlasifikasi = [];
-        $segmen = [];
-        for($x=0; $x < count($output);$x++){
-            array_push($segmen,(string)$x);
-            if($output[$x]=="Normal"){
-                array_push($arrayKlasifikasi,$output[$x]);
-            } elseif ($output[$x]=="Interiktal") {
-                array_push($arrayKlasifikasi,$output[$x]);
-            } else {
-                array_push($arrayKlasifikasi,$output[$x]);
-            }
-        }
-        // return $output;
-        return view('cropKlasifikasi',['arrayKlasifikasi'=>$arrayKlasifikasi,'segmen'=>$segmen]);
+        return view('cropKlasifikasi',['arrayKlasifikasi'=>$output,'namaFile'=>$namaFile]);
     }
     public function historyDashboard()
     {
@@ -85,7 +75,6 @@ class KlasifikasiController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        // return $output;
         return view('history',['output'=>$output,'namaFile'=>$namaFile]);
     }
 }

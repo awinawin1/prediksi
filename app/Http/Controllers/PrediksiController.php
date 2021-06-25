@@ -12,14 +12,19 @@ class PrediksiController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('v_uploadPrediksi');
+        $message ="";
+        return view('v_uploadPrediksi',['message'=>$message]);
     }
     public function upload(Request $request){
         $this->validate($request, [
             'file' => 'required'
         ]);
         $file = $request->file('file');
-
+        $ext = $file->getClientOriginalExtension();
+        if($ext!="edf"){
+            $message = "Hanya Menerima File EDF";
+            return view('v_uploadPrediksi',['message'=>$message]);
+        }
         $namaFile = $file->getClientOriginalName();
         $filePath = $file->storeAs('uploadedPrediksi',$namaFile,'public');
         $prediksi = new Prediksi;
@@ -36,36 +41,26 @@ class PrediksiController extends Controller
         }
     }
     public function viewData($namaFile){
-        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile);
+        $command = escapeshellcmd("python3 ".public_path("code/simpleView.py")." ".$namaFile." "."2");
 
         $output = shell_exec($command);
-        $m = array('msg' => $output);
-        print_r($output);
+        $sinyal = "uploadedPrediksi/".$namaFile.".png";
+        $kategori = "Prediksi";
+        return view('sinyal',['sinyal'=>$sinyal,'namaFile'=>$namaFile,'kategori'=>$kategori]);
     }
 
     public function prediksi($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/simpleCropPredictIctal.py")." ". $namaFile);
         $output = shell_exec($command);
+        $command_predict = escapeshellcmd("python3 ".public_path("code/prediksi.py")." ". $namaFile);
+        $index_prediksi = shell_exec($command_predict);
         $output = str_replace("'","",$output);
         $output = str_replace("[","",$output);
         $output = str_replace("]","",$output);
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        $arrayPrediksi = [];
-        $segmen = [];
-        for($x=0; $x < count($output);$x++){
-            array_push($segmen,(string)$x);
-            if($output[$x]=="Normal"){
-                array_push($arrayPrediksi,$output[$x]);
-            } elseif ($output[$x]=="Inter") {
-                array_push($arrayPrediksi,$output[$x]);
-            } else {
-                array_push($arrayPrediksi,$output[$x]);
-            }
-        }
-        // return $output;
-        return view('cropPrediksi',['arrayPrediksi'=>$arrayPrediksi,'segmen'=>$segmen]);
+        return view('cropPrediksi',['arrayPrediksi'=>$output,'namaFile'=>$namaFile,'index_prediksi'=>$index_prediksi]);
     }
     public function history($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/historyPrediksi.py")." ". $namaFile);

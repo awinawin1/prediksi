@@ -5,6 +5,7 @@ Created on Sat May 15 00:21:05 2021
 @author: marina
 """
 
+# from public.code.historyPrediksi import FILE
 import pyedflib
 import matplotlib
 matplotlib.use('WebAgg')
@@ -12,11 +13,23 @@ import matplotlib.pyplot as plt,mpld3
 import numpy as np
 import pandas as pd
 import sys
-pathDataSet = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploaded/"
-#pathDataSet =
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+pathDataSetKlasifikasi = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploaded/"
+pathDataSetPrediksi ="/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedPrediksi/"
+pathDataSetSpektogram ="/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/uploadedSpektogram/"
+pathDataSet =""
 
 if __name__ == '__main__':
     file=sys.argv[1]
+    simulasi=sys.argv[2]
+    if simulasi=="1":
+        pathDataSet = pathDataSetKlasifikasi
+    elif simulasi=="2":
+        pathDataSet = pathDataSetPrediksi
+    elif simulasi =="3":
+        pathDataSet = pathDataSetSpektogram
+    # print(pathDataSet)
     # file = 'chb01_01.edf'    
     file = file.replace("'","")
     fullNm = pathDataSet + file   
@@ -43,9 +56,11 @@ if __name__ == '__main__':
     C = df_signals.columns
 
     fig1 = plt.figure(figsize=(12,12))
+    canvas = FigureCanvas(fig1)
+    
     detik = 40
     plot_10= 256*detik
-    plt.suptitle("Fig: %d detik (256*%d) recorded by 22 channels"%(detik,detik), fontsize= 14)
+    # plt.suptitle("Fig: %d detik (256*%d) recorded by 22 channels"%(detik,detik), fontsize= 14)
     for i in range(22): 
         ax[i] = plt.subplot(23,1,i+1)
         ax[i].plot(df_signals[C[i]].iloc[0:plot_10],"blue")
@@ -58,14 +73,15 @@ if __name__ == '__main__':
         ax[i].spines["left"].set_visible(False)
         # ax[i].set_ylabel(C[i], fontsize=12, rotation=0)
         ax[i].yaxis.set_label_position("right")
-    print ('<HTML><HEAD><TITLE>Python Matplotlib Graph</TITLE></HEAD>')
-    print ('<BODY>')
-    print ('<CENTER>')    
-    print ('<H3>Graph</H3>')
-    print ('<H3>%s</H3>'%fullNm)
-    print (mpld3.fig_to_html(fig1, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False))
+    # print ('<HTML><HEAD><TITLE>Python Matplotlib Graph</TITLE></HEAD>')
+    # print ('<BODY>')
+    # print ('<CENTER>')    
+    # print ('<H3>Graph</H3>')
+    # print ('<H3>%s</H3>'%fullNm)
+    fig1.savefig(pathDataSet+file+'.png')
+    # print (mpld3.fig_to_html(fig1, d3_url=None, mpld3_url=None, no_extras=False, template_type='general', figid=None, use_http=False))
        
-    print ('</CENTER>')
-    print ('</BODY>')
-    print ('</html>')
+    # print ('</CENTER>')
+    # print ('</BODY>')
+    # print ('</html>')
         

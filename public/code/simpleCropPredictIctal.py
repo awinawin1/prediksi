@@ -163,6 +163,7 @@ def getFeatureStatWithWavelet(signal,numCH,waveName,level):
   
 if __name__ == '__main__':
     FILE=sys.argv[1]
+    # iktal_alert
     # FILE = 'chb24_22.edf'
     # FILE = 'chb24_09.edf'
     loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/channel_keeps.npz")
@@ -200,7 +201,8 @@ if __name__ == '__main__':
     modelInter    = create_modelCNN(oneData.shape,KELASInter)#,False)    
     modelInter.load_weights(nmModelInter)    
     ictal_alert = 0
-    
+    done_ictal = 0
+    sinyal_iktal = 0
     for idx in range(cropData.shape[0]): 
         numCH   = cropData[idx].shape[0]
         signal  = cropData[idx]
@@ -220,8 +222,11 @@ if __name__ == '__main__':
             yPredTime=np.argmax(yPredTime,axis=1)
             time =  label_encoder.inverse_transform(yPredTime)
             ictal_alert = ictal_alert + 1
-            if ictal_alert==2:
-                print("Ictal akan terjadi dalam waktu %g detik "%time)                
+            if ictal_alert==1:
+                # print("Ictal akan terjadi dalam waktu %g detik "%time)
+                if done_ictal==0:
+                    done_ictal=1
+                    sinyal_iktal = idx                
         else:
             hasil = "Ictal"
             ictal_alert = 0
@@ -229,8 +234,11 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        if cnt>10:
+        if cnt>30:
             break
+    prediksiIktal = open(pathSaveData+FILE+"prediksi"+".txt","w")
+    prediksiIktal.write(str(sinyal_iktal))
+    prediksiIktal.close()
     saveHistory = open(pathSaveData+FILE+".txt","w")
     saveHistory.write(str(segmen))
     saveHistory.close()

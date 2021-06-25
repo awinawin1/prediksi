@@ -9,7 +9,8 @@
         <h2 class="text-center my-5">Data Klasifikasi</h2>
         <div class="col-md-auto mx-auto my-5">
           <div class="card card-chart" style="width: 800px; overflow-y:scroll">
-            <div class="card-body">
+            <div class="card-body" style="padding-left:30px;">
+              <p>Sinyal {{$namaFile}} terklasifikasi menggunakan wavelet dalam tiga kategori yaitu normal, inter, dan ictal. Hasil klasifikasi sinyal {{$namaFile}} dapat dilihat pada grafik dibawah.</p>
               <div style="width: 750px;" id="myChart"></div>
             </div>
           </div>
