@@ -65,13 +65,16 @@ class PrediksiController extends Controller
     public function history($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/historyPrediksi.py")." ". $namaFile);
         $output = shell_exec($command);
+        $command_predict = escapeshellcmd("python3 ".public_path("code/prediksi.py")." ". $namaFile);
+        $index_prediksi = shell_exec($command_predict);
         $output = str_replace("'","",$output);
         $output = str_replace("[","",$output);
         $output = str_replace("]","",$output);
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        // return $output;
-        return view('history',['output'=>$output,'namaFile'=>$namaFile]);
+        $deskripsi ="Kejang akan terjadi 297 detik setelah segmen ".$index_prediksi.". 
+                     Prediksi dilakukan untuk bersiap sebelum pasien mengalami kejang epilepsi.";
+        return view('history',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi]);
     }
 }

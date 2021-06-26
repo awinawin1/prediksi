@@ -70,8 +70,9 @@ class SpektogramController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        // return $output;
-        return view('history',['output'=>$output,'namaFile'=>$namaFile]);
+        $deskripsi ="Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, 
+                     silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut.";
+        return view('history',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi]);
     }
     public function imageSpektogram($namaFile,$index)
     {

@@ -75,6 +75,8 @@ class KlasifikasiController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        return view('history',['output'=>$output,'namaFile'=>$namaFile]);
+        $deskripsi ="Sinyal ".$namaFile." terklasifikasi menggunakan wavelet dalam tiga kategori yaitu normal, inter, dan ictal.
+                     Hasil klasifikasi sinyal ".$namaFile." dapat dilihat pada grafik dibawah.";
+        return view('history',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi]);
     }
 }

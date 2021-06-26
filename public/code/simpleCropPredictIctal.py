@@ -234,8 +234,8 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        if cnt>30:
-            break
+        # if cnt>30:
+        #     break
     prediksiIktal = open(pathSaveData+FILE+"prediksi"+".txt","w")
     prediksiIktal.write(str(sinyal_iktal))
     prediksiIktal.close()
