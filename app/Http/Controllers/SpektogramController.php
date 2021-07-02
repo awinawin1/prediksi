@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Spektogram;
+use App\Models\Pasien;
 
 class SpektogramController extends Controller
 {
@@ -26,6 +28,17 @@ class SpektogramController extends Controller
             return view('v_uploadSpektogram',['message'=>$message]);
         }
         $namaFile = $file->getClientOriginalName();
+        $data_pasien = substr($namaFile,0,5);
+        $age = DB::table('pasiens')->where('subject',$data_pasien)->value('age');
+        $gender = DB::table('pasiens')->where('subject',$data_pasien)->value('gender');
+        if ($gender=="F") {
+            $gender="perempuan";
+        }else {
+            $gender="laki-laki";
+        }
+        $seizure = DB::table('pasiens')->where('subject',$data_pasien)->value('seizure');
+        $ictal = DB::table('pasiens')->where('subject',$data_pasien)->value('ictal');
+        $inter = DB::table('pasiens')->where('subject',$data_pasien)->value('inter');
         $filePath = $file->storeAs('uploadedSpektogram',$namaFile,'public');
         $spektogram = new Spektogram;
         $spektogram->filename = $namaFile;
@@ -34,7 +47,7 @@ class SpektogramController extends Controller
         $tujuan_upload = 'uploadedSpektogram';
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
-            return view('spektogramdata',['namaFile' => $namaFile]);
+            return view('spektogramdata',['namaFile' => $namaFile,'age'=>$age,'gender'=>$gender,'seizure'=>$seizure,'ictal'=>$ictal,'inter'=>$inter]);
         }
         else {
             echo "Upload Gagal!";
@@ -46,7 +59,7 @@ class SpektogramController extends Controller
 
         $output = shell_exec($command);
         $sinyal = "uploadedSpektogram/".$namaFile.".png";
-        $kategori = "Spektogram";
+        $kategori = "spektogram";
         return view('sinyal',['sinyal'=>$sinyal,'namaFile'=>$namaFile,'kategori'=>$kategori]);
     }
 
@@ -70,9 +83,10 @@ class SpektogramController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        $deskripsi ="Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, 
-                     silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut.";
-        return view('history',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi]);
+        $kategori = "spektogram";
+        $deskripsi ="Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Satu segmen sama dengan tiga detik. Pada setiap segmen terdapat gambar spectrum yang dapat dilihat. 
+        Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut. Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.";
+        return view('riwayatSpektogram',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi,'kategori'=>$kategori]);
     }
     public function imageSpektogram($namaFile,$index)
     {

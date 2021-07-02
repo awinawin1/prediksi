@@ -173,22 +173,22 @@
                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service1.png" alt="#" /></i>
-                     <h3>Klasifikasi</h3>
-                     <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.</p>
+                     <h3>Klasifikasi Wavelet</h3>
+                     <p>Melakukan klasifikasi untuk membedakan kondisi normal, sebelum kejang, dan saat kejang.</p>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service2.png" alt="#" /></i>
                      <h3>Prediksi</h3>
-                     <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.</p>
+                     <p>Mendapatkan waktu untuk persiapan sebelum kejang terjadi.</p>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service3.png" alt="#" /></i>
-                     <h3>Klasifikasi dan Spektogram</h3>
-                     <p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.</p>
+                     <h3>Klasifikasi Spektogram</h3>
+                     <p>Melakukan klasifikasi dan menampilkan gambar sinyal spektrum.</p>
                   </div>
                </div>
                

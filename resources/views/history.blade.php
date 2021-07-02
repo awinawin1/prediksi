@@ -7,8 +7,8 @@
       <div class="container-fluid">
         <br>
         <h2 class="text-center my-5">Sinyal {{$namaFile}}</h2>
-        <div class="col-md-auto mx-auto my-5">
-          <div class="card card-chart" style="width: 800px; overflow-y:scroll">
+        <div class="col-md-auto mx-auto my-5 text-center">
+          <div class="card card-chart" style="overflow-y:scroll">
             <div class="card-body" style="padding-left:30px;">
               <p>{{$deskripsi}}</p>
               <div style="width: 750px;" id="myChart"></div>
@@ -54,7 +54,6 @@
         }
       ]
     };
-
     // Render Method[3]
     zingchart.render({
       id: 'myChart',

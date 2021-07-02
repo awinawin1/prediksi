@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Klasifikasi;
+use App\Models\Pasien;
 
 class KlasifikasiController extends Controller
 {
@@ -26,6 +28,17 @@ class KlasifikasiController extends Controller
             return view('v_uploadKlasifikasi',['message'=>$message]);
         }
         $namaFile = $file->getClientOriginalName();
+        $data_pasien = substr($namaFile,0,5);
+        $age = DB::table('pasiens')->where('subject',$data_pasien)->value('age');
+        $gender = DB::table('pasiens')->where('subject',$data_pasien)->value('gender');
+        if ($gender=="F") {
+            $gender="perempuan";
+        }else {
+            $gender="laki-laki";
+        }
+        $seizure = DB::table('pasiens')->where('subject',$data_pasien)->value('seizure');
+        $ictal = DB::table('pasiens')->where('subject',$data_pasien)->value('ictal');
+        $inter = DB::table('pasiens')->where('subject',$data_pasien)->value('inter');
         $filePath = $file->storeAs('uploaded',$namaFile,'public');
 
         $klasifikasi = new Klasifikasi;
@@ -35,7 +48,7 @@ class KlasifikasiController extends Controller
         $tujuan_upload = 'uploaded';
         $terupload = $file->move($tujuan_upload,$file->getClientOriginalName());
         if ($terupload) {
-            return view('klasifikasidata',['namaFile' => $namaFile]);
+            return view('klasifikasidata',['namaFile' => $namaFile,'age'=>$age,'gender'=>$gender,'seizure'=>$seizure,'ictal'=>$ictal,'inter'=>$inter]);
         }
         else {
             echo "Upload Gagal!";
@@ -47,7 +60,7 @@ class KlasifikasiController extends Controller
 
         $output = shell_exec($command);
         $sinyal = "uploaded/".$namaFile.".png";
-        $kategori = "Klasifikasi";
+        $kategori = "klasifikasi";
         return view('sinyal',['sinyal'=>$sinyal,'namaFile'=>$namaFile,'kategori'=>$kategori]);
     }
 
@@ -75,8 +88,8 @@ class KlasifikasiController extends Controller
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        $deskripsi ="Sinyal ".$namaFile." terklasifikasi menggunakan wavelet dalam tiga kategori yaitu normal, inter, dan ictal.
-                     Hasil klasifikasi sinyal ".$namaFile." dapat dilihat pada grafik dibawah.";
+        $deskripsi ="Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalamni kejang. 1 Segmen sama dengan tiga detik. 
+        Sinyal ".$namaFile." terklasifikasi menggunakan wavelet dalam tiga kategori yaitu normal, inter, dan ictal. Hasil klasifikasi sinyal ".$namaFile." dapat dilihat pada grafik dibawah. Untuk memfokuskan pada grafik dapat menarik garis pada dibawah grafik.";
         return view('history',['output'=>$output,'namaFile'=>$namaFile,'deskripsi'=>$deskripsi]);
     }
 }

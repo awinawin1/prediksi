@@ -7,7 +7,7 @@
         <h3 class="text-center my-5">Sinyal {{$namaFile}} Segmen {{$segmen}}</h3>
         <div class="col-lg-10 mx-auto my-5">
             <div class="card card-chart">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <img src="{{ url('storage/fitur3Kelas30DetikImg/'.$spektogramFile) }}" alt="">
                 </div>
             </div>

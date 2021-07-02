@@ -8,9 +8,9 @@
         <br>
         <h2 class="text-center my-5">Data Spektogram {{$namaFile}}</h2>
         <div class="col-md-auto mx-auto my-5">
-          <div class="card card-chart" style="width: 800px; overflow-y:scroll">
+          <div class="card card-chart" style="overflow-y:scroll">
             <div class="card-body" style="padding-left:30px;">
-              <p>Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut</p>
+              <p>Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Satu segmen sama dengan tiga detik. Pada setiap segmen terdapat gambar spectrum yang dapat dilihat. Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut. Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.</p>
               <div style="width: 750px;" id="myChart"></div>
             </div>
           </div>

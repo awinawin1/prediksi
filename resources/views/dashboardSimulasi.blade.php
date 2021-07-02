@@ -12,11 +12,14 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Klasifikasi</h4>
-              <p class="card-category d-flex justify-content-center">
+              <p class="card-category d-flex justify-content-center" style="height:100px;">
+                Mengklasifikasikan sinyal menjadi tiga yaitu kondisi normal, kondisi inter, dan kondisi ictal(kejang) yang membutuhkan inputan file sinyal EEG. 
+              </p>
+              <div class="border-top text-center">
                 <a class="text-white" href="{{route('uploadKlasifikasi')}}">
                   <button class="btn btn-warning">Simulasi Klasifikasi</button>
                 </a>  
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -27,11 +30,14 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Prediksi</h4>
-              <p class="card-category d-flex justify-content-center">
+              <p class="card-category d-flex justify-content-center" style="height:100px;">
+                Melakukan prediksi terhadap sinyal EEG yang diinputkan sehingga menghasilkan waktu prediksi akan terjadi kejang epilepsi.
+              </p>
+              <div class="border-top text-center">
                 <a class="text-white" href="{{route('prediksiUpload')}}">
                   <button class="btn btn-warning">Simulasi Prediksi</button>
                 </a>
-              </p>
+              </div>
             </div>
           </div>
         </div>
@@ -42,11 +48,14 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">Spektogram</h4>
-              <p class="card-category d-flex justify-content-center">
+              <p class="card-category d-flex justify-content-center" style="height:100px;">
+                Melakukan klasifikasi sinyal EEG yang diinputkan dan menghasilkan gambar spektrum dari setiap segmen yang dihasilkan.
+              </p>
+              <div class="border-top text-center">
                 <a class="text-white" href="{{route('uploadSpektogram')}}">
                   <button class="btn btn-warning">Simulasi Spektogram</button>
                 </a>
-              </p>
+              </div>
             </div>
           </div>
         </div>
