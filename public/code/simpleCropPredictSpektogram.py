@@ -163,10 +163,10 @@ def plotSpektogram(x,fs,nmFile=''):
         img = plt.pcolormesh(t, f[:cut], sinyal[:cut], shading='gouraud')
         imgAll.append([(r, g, b) for r, g, b, a in img.to_rgba(img.get_array())])
     # print(nmFile)
-    if nmFile !='':
+    # if nmFile !='':
          #(18, 30, 3)
         # print("masuk sini")
-        plt.savefig(nmFile)
+        # plt.savefig(nmFile)
         # plt.show()
         # plt.imsave(nmFile, imgAll)
     
@@ -181,9 +181,9 @@ if __name__ == '__main__':
     # FILE = 'chb07_12.edf'
     FILE = FILE.replace("'","")
     dir_path = "/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"
-    if(os.path.isdir(dir_path+FILE)):
-        shutil.rmtree(dir_path+FILE)
-    os.mkdir("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"+FILE,0o777)
+    # if(os.path.isdir(dir_path+FILE)):
+    #     shutil.rmtree(dir_path+FILE)
+    # os.mkdir("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"+FILE,0o777)
     loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/channel_keeps.npz")
     selected_channels =loaded['channel_keeps'] 
     segmen=[]
@@ -223,8 +223,8 @@ if __name__ == '__main__':
         segmen.append(hasil)    
         # print("segment=%d prediksi=%s  <br>"%(idx,hasil))
         cnt+=1
-        if cnt>100:
-            break
+        # if cnt>100:
+        #     break
     saveHistory = open(pathSaveData+FILE+".txt","w")
     saveHistory.write(str(segmen))
     saveHistory.close()

@@ -94,4 +94,15 @@ class SpektogramController extends Controller
         // return $url;
         return view('imageSpektogram',['spektogramFile'=>$spektogramFile,'namaFile'=>$namaFile,'segmen'=>$index]);
     }
+    public function historySpektogram($namaFile)
+    {
+        $dir = storage_path("app/public/fitur3Kelas30DetikImg/".$namaFile."/");
+        $images = glob($dir."*.png");
+        // print_r($dir);
+        return view('riwayatgambar',['spekto'=>$images]);
+    }
+    public function riwayatgambar($namaFile)
+    {
+        return view('riwayatgambar',['namaFile'=>$namaFile]);
+    }
 }

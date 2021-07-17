@@ -92,6 +92,7 @@
                               <li class="nav-item">
                                  <a class="nav-link" href="#simulasikan">Coba Sekarang</a>
                               </li>
+                              @if (Auth::check())
                               <li class="nav-item dropdown">
                                  <a class="nav-link" href="#" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Akun
@@ -107,6 +108,11 @@
                                     </a>
                                  </div>
                               </li>
+                              @else
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{{route('login')}}">Login</a>
+                              </li>
+                              @endif
                            </ul>
                         </div>
                      </nav>

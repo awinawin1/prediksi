@@ -222,7 +222,7 @@ if __name__ == '__main__':
             yPredTime=np.argmax(yPredTime,axis=1)
             time =  label_encoder.inverse_transform(yPredTime)
             ictal_alert = ictal_alert + 1
-            if ictal_alert==1:
+            if ictal_alert==6:
                 # print("Ictal akan terjadi dalam waktu %g detik "%time)
                 if done_ictal==0:
                     done_ictal=1
@@ -234,7 +234,7 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        if cnt>100:
+        if cnt>500:
             break
     prediksiIktal = open(pathSaveData+FILE+"prediksi"+".txt","w")
     prediksiIktal.write(str(sinyal_iktal))

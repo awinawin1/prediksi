@@ -65,6 +65,7 @@ Route::get('/history_spektogram',function(){
 	return view('historySpektogram',['spektogram'=>$spektogram]);
 })->name('historySpektogram');
 Route::get('/spektogram-picture/{namaFile}/{index}',[SpektogramController::class, 'imageSpektogram']);
+Route::get('/list-spektogram/{namaFile}',[SpektogramController::class, 'riwayatgambar'])->name('riwayatgambar');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);

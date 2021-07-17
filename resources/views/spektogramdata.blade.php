@@ -45,6 +45,21 @@
                         </div>
                     </div>
                 </div>
+                <!-- <div class="col-lg-6 my-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">Gambar Spektogram</h3>
+                            <div class="col">
+                                <div class="row" style="height:75px;">
+                                    <b>Gambar Spektogram  {{$namaFile}}</b>
+                                </div>
+                                <div class="row d-flex justify-content-center border-top">
+                                    <a class="text-center" href="{{route('riwayatgambar',$namaFile)}}"><button class="btn btn-warning">Spektogram</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

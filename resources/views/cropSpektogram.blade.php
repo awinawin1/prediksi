@@ -19,7 +19,6 @@
     </div>
 </div>
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-
 <script>
     let index;
     let file = {!! json_encode($namaFile) !!};
@@ -29,7 +28,7 @@
 
       },
       title: {
-        text: ' ',
+        text: 'Grafik Sinyal',
         fontSize: 24,
       },
       legend: {
@@ -37,6 +36,7 @@
       },
       scaleX: {
         // Set scale label
+        zooming: true,
         label: { text: ' ' },
         // Convert text on scale indices
       },

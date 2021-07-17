@@ -206,7 +206,7 @@ if __name__ == '__main__':
         segmen.append(hasil)
         # print("segment=%d prediksi=%s <br>"%(idx,hasil))
         cnt+=1
-        if cnt>100:
+        if cnt>500:
             break
     saveHistory = open(pathSaveData+FILE+".txt","w")
     saveHistory.write(str(segmen))

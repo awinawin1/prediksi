@@ -26,7 +26,7 @@
 
       },
       title: {
-        text: ' ',
+        text: 'Grafik Sinyal',
         fontSize: 24,
       },
       legend: {
