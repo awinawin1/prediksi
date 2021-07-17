@@ -87,10 +87,10 @@
                                  <a class="nav-link" href="#tentang"> Tentang  </a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="#Simulasi">Simulasi</a>
+                                 <a class="nav-link" href="#Rekaman">Rekaman Epilepsy</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="#simulasikan">Coba Sekarang</a>
+                                 <a class="nav-link" href="#Simulasi">Simulasi</a>
                               </li>
                               @if (Auth::check())
                               <li class="nav-item dropdown">
@@ -130,7 +130,7 @@
                <div class="col-md-5">
                   <div class="text-bg">
                      <h1>Epilepsi</h1>
-                     <p>Berdasarkan data dari <i>World Health Organization(WHO)</i>, diperkirakan lima juta orang didiagnosis dengan epilepsi setiap tahun. Di negara-negara berpenghasilan tinggi, diperkirakan ada 49 per 100.000 orang yang didiagnosis menderita epilepsi setiap tahun. Di negara-negara berpenghasilan rendah dan menengah, angka ini bisa mencapai 139 per 100.000.</p>
+                     <p class="text-justify">Berdasarkan data dari <i>World Health Organization(WHO)</i>, diperkirakan lima juta orang didiagnosis dengan epilepsi setiap tahun. Di negara-negara berpenghasilan tinggi, diperkirakan ada 49 per 100.000 orang yang didiagnosis menderita epilepsi setiap tahun. Di negara-negara berpenghasilan rendah dan menengah, angka ini bisa mencapai 139 per 100.000.</p>
                   </div>
                </div>
                <div class="col-md-7">
@@ -156,7 +156,7 @@
                <div class="col-md-12">
                   <div class="web_hosting">
                      <figure><img style="height:256px"src="{{ asset('material') }}/img/epilepsyIcon.png" alt="#"/></figure>
-                     <p>Epilepsi adalah penyakit otak kronis yang tidak menular yang mempengaruhi sekitar 50 juta orang di seluruh dunia. Hal ini ditandai dengan kejang berulang, yang merupakan gerakan singkat tak sadar yang mungkin melibatkan sebagian tubuh atau seluruh tubuh dan kadang-kadang disertai dengan hilangnya kesadaran dan kontrol fungsi usus atau kandung kemih. Kejang terjadi akibat dari pelepasan listrik yang berlebihan pada sekelompok sel otak. Bagian otak yang berbeda dapat menjadi tempat pembuangan tersebut. Kejang dapat bervariasi dari penyimpangan perhatian atau sentakan otot yang singkat hingga kejang yang parah dan berkepanjangan. Kejang juga dapat bervariasi dalam frekuensi, dari kurang dari 1 per tahun hingga beberapa per hari.<i>(WHO)</i></p>
+                     <p class="text-justify">Epilepsi adalah penyakit otak kronis yang tidak menular yang mempengaruhi sekitar 50 juta orang di seluruh dunia. Hal ini ditandai dengan kejang berulang, yang merupakan gerakan singkat tak sadar yang mungkin melibatkan sebagian tubuh atau seluruh tubuh dan kadang-kadang disertai dengan hilangnya kesadaran dan kontrol fungsi usus atau kandung kemih. Kejang terjadi akibat dari pelepasan listrik yang berlebihan pada sekelompok sel otak. Bagian otak yang berbeda dapat menjadi tempat pembuangan tersebut. Kejang dapat bervariasi dari penyimpangan perhatian atau sentakan otot yang singkat hingga kejang yang parah dan berkepanjangan. Kejang juga dapat bervariasi dalam frekuensi, dari kurang dari 1 per tahun hingga beberapa per hari.<i>(WHO)</i></p>
                   </div>
                </div>
             </div>
@@ -164,13 +164,19 @@
       </div>
       <!-- end Hosting -->
       <!-- Services  -->
-      <div id="Simulasi" class="Services">
+      <div id="Rekaman" class="Services">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Simulasi Klasifikasi dan Prediksi Epilepsi</h2>
-                     <p>Terdapat tiga fitur yang dapat digunakan untuk melakukan klasifikasi dan prediksi epilepsi
+                     <h2>Rekaman Sinyal Epilepsy</h2>
+                     <p class="text-justify">
+                     Elektroensefalogram (EEG) adalah Alat untuk merekam aktivitas listrik dari otak dengan menggunakan pena yang menulis di atas gulungan kertas. 
+                     EEG merekam aktivitas elektrik di sepanjang kulit kepala. EEG mengacu kepada perekaman aktivitas elektrik spontan dari otak selama periode tertentu. Tes ini mampu menunjukkan tanda penyakit alzheimer dan epilepsy.
+                     </p>
+                     <div class="border-top my-3"></div>
+                     <p class="text-center">
+                        Terdapat tiga fitur yang dapat digunakan untuk melakukan klasifikasi terhadap hasil perekaman EEG.
                      </p>
                   </div>
                </div>
@@ -180,36 +186,41 @@
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service1.png" alt="#" /></i>
                      <h3>Klasifikasi Wavelet</h3>
-                     <p>Melakukan klasifikasi untuk membedakan kondisi normal, sebelum kejang, dan saat kejang.</p>
+                     <p class="text-center">Melakukan klasifikasi untuk membedakan kondisi normal, sebelum kejang, dan saat kejang.</p>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service2.png" alt="#" /></i>
                      <h3>Prediksi</h3>
-                     <p>Mendapatkan waktu untuk persiapan sebelum kejang terjadi.</p>
+                     <p class="text-center">Mendapatkan waktu untuk persiapan sebelum kejang terjadi.</p>
                   </div>
                </div>
                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                   <div class="Services-box">
                      <i><img src="{{ asset('material') }}/img/service3.png" alt="#" /></i>
                      <h3>Klasifikasi Spektogram</h3>
-                     <p>Melakukan klasifikasi dan menampilkan gambar sinyal spektrum.</p>
+                     <p class="text-center">Melakukan klasifikasi dan menampilkan gambar sinyal spektrum.</p>
                   </div>
                </div>
                
-               <a class="read_more" href="#simulasikan">Coba Sekarang</a>
+               <a class="read_more" href="#Simulasi">Coba Sekarang</a>
             </div>
          </div>
       </div>
       <!-- end Servicess -->
       <!-- why -->
-      <div id="simulasikan" class="why">
+      <div id="Simulasi" class="why">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
                      <h2>Uji Coba Simulasi Epilepsi</h2>
+                     <p class="text-justify">
+                        Uji coba dilakukan akan menghasilkan visualisasi sinyal EEG dalam bentuk grafik. Grafik akan terdiri dari hasil klasifikasi terhadap sinyal EEG.
+                        Klasifikasi wavelet membantu membaca sinyal EEG dengan menghasilkan grafik hasil klasifikasi sinyal EEG kedalam tiga fase yaitu normal, interiktal, dan ictal(kejang).
+                        Prediksi membantu memberitahukan akan terjadinya epilepsi 5 menit sebelum kejang. Dan Klasifikasi spektogram akan menghasilkan gambar spektrum pada setiap kondisi hasil klasifikasi. 
+                     </p>
                   </div>
                </div>
             </div>
@@ -218,7 +229,7 @@
                   <div class="why-box">
                      <i><img src="{{ asset('material') }}/img/why2.png" alt="#" /></i>
                      <h3>Simulasi Epilepsi</h3>
-                     <p>Untuk melakukan uji coba mensimulasikan terjadinya epilepsi</p>
+                     <p>Untuk melakukan uji coba melakukan klasifikasi sinyal EEG epilepsi</p>
                      <div class="border-top my-3"></div>
                      <a class="read_more bg" href="{{ route('simulasiEpilepsi') }}">Simulasi Epilepsi</a>
                   </div>
@@ -237,7 +248,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>© 2019 All Rights Reserved.</p>
+                        <p>© 2021 All Rights Reserved.</p>
                      </div>
                   </div>
                </div>
