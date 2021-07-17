@@ -185,7 +185,7 @@ if __name__ == '__main__':
     oneData  = oneData.reshape(1,oneData.shape[0],oneData.shape[1])
     KELAS    = 3
     model    = create_modelCNN(oneData.shape,KELAS)#,False)    
-    nmModel  = '/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/modelCNN_3Kelas.h5'
+    nmModel  = '/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/modelCNN_3.h5'
     # nmModel  = ''
 
     model.load_weights(nmModel)    
@@ -234,7 +234,7 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        if cnt>500:
+        if cnt>10:
             break
     prediksiIktal = open(pathSaveData+FILE+"prediksi"+".txt","w")
     prediksiIktal.write(str(sinyal_iktal))

@@ -10,7 +10,9 @@
         <div class="col-md-auto mx-auto my-5">
           <div class="card card-chart" style="overflow-y:scroll">
             <div class="card-body" style="padding-left:30px;">
-              <p>Prediksi dilakukan untuk bersiap sebelum pasien mengalami kejang epilepsi. Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Satu segmen sama dengan tiga detik. Kejang akan terjadi 297 detik setelah segmen {{$index_prediksi}}. Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.</p>
+              <p>Prediksi dilakukan untuk bersiap sebelum pasien mengalami kejang epilepsi. Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Satu segmen sama dengan tiga detik. 
+              Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.</p>
+              <h5><b>Kejang akan terjadi 297 detik setelah segmen {{$index_prediksi}}.</b></h5>
               <div style="width: 750px;" id="myChart"></div>
             </div>
           </div>
