@@ -10,8 +10,10 @@
         <div class="col-md-auto mx-auto my-5">
           <div class="card card-chart" style="overflow-y:scroll">
             <div class="card-body" style="padding-left:30px;">
-              <p>Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Satu segmen sama dengan tiga detik. Pada setiap segmen terdapat gambar spectrum yang dapat dilihat. Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut. Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.</p>
+              <p>Kondisi normal adalah kondisi disaat gelombang otak normal. Inter adalah kondisi otak sebelum terjadinya epilepsi. Dan ictal adalah kondisi yang menandakan pasien sedang mengalami kejang. Pada setiap segmen terdapat gambar spectrum yang dapat dilihat. Untuk melihat gambar spektogram yang dihasilkan pada setiap kondisi, silahkan tekan titik pada grafik untuk melihat gambar spektogram pada saat tersebut. Untuk melihat lebih detail dapat melakukan zoom ke titik yang ingin dilihat dengan menarik bar kecil dibawah grafik.</p>
               <div style="width: 750px;" id="myChart"></div>
+              <p class="mt-4">Dibawah ini merupakan kondisi kejang pada hasil perekaman EEG dengan gambar berlatar merah merupakan kondisi kejang.</p>
+              <img src="{{ asset('stiwarih') }}/chb01.png" alt="">
             </div>
           </div>
         </div>

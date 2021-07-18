@@ -67,13 +67,19 @@ class PrediksiController extends Controller
         $output = shell_exec($command);
         $command_predict = escapeshellcmd("python3 ".public_path("code/prediksi.py")." ". $namaFile);
         $index_prediksi = shell_exec($command_predict);
+        $index_prediksi = str_replace("'","",$index_prediksi);
+        $index_prediksi = str_replace("[","",$index_prediksi);
+        $index_prediksi = str_replace("]","",$index_prediksi);
+        $index_prediksi = explode(",",$index_prediksi);
+        $index_prediksi = str_replace("\n","",$index_prediksi);
+        $index_prediksi = str_replace(" ","",$index_prediksi);
         $output = str_replace("'","",$output);
         $output = str_replace("[","",$output);
         $output = str_replace("]","",$output);
         $output = explode(",",$output);
         $output = str_replace("\n","",$output);
         $output = str_replace(" ","",$output);
-        return view('cropPrediksi',['arrayPrediksi'=>$output,'namaFile'=>$namaFile,'index_prediksi'=>$index_prediksi]);
+        return view('cropPrediksi',['arrayPrediksi'=>$output,'namaFile'=>$namaFile,'index_prediksi'=>$index_prediksi[0],'waktu_prediksi'=>$index_prediksi[1]]);
     }
     public function history($namaFile){
         $command = escapeshellcmd("python3 ".public_path("code/historyPrediksi.py")." ". $namaFile);

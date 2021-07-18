@@ -202,7 +202,7 @@ if __name__ == '__main__':
     modelInter.load_weights(nmModelInter)    
     ictal_alert = 0
     done_ictal = 0
-    sinyal_iktal = 0
+    sinyal_iktal = ["0"]
     for idx in range(cropData.shape[0]): 
         numCH   = cropData[idx].shape[0]
         signal  = cropData[idx]
@@ -226,7 +226,8 @@ if __name__ == '__main__':
                 # print("Ictal akan terjadi dalam waktu %g detik "%time)
                 if done_ictal==0:
                     done_ictal=1
-                    sinyal_iktal = idx                
+                    sinyal_iktal[0] = idx
+                    sinyal_iktal.append(time[0])           
         else:
             hasil = "Ictal"
             ictal_alert = 0
@@ -234,8 +235,8 @@ if __name__ == '__main__':
         segmen.append(hasil)  
         # print("segment=%d prediksi=%s  "%(idx,hasil))
         cnt+=1
-        # if cnt>10:
-        #     break
+        if cnt>1000:
+            break
     prediksiIktal = open(pathSaveData+FILE+"prediksi"+".txt","w")
     prediksiIktal.write(str(sinyal_iktal))
     prediksiIktal.close()

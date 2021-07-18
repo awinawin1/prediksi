@@ -184,7 +184,7 @@ if __name__ == '__main__':
     # if(os.path.isdir(dir_path+FILE)):
     #     shutil.rmtree(dir_path+FILE)
     # os.mkdir("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/fitur3Kelas30DetikImg/"+FILE,0o777)
-    loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/channel_keeps.npz")
+    loaded = np.load("/Applications/XAMPP/xamppfiles/htdocs/prediksi/storage/app/public/spektogram/channel_keeps.npz")
     selected_channels =loaded['channel_keeps'] 
     segmen=[]
     raw = loadAndFiltering(FILE,selected_channels)
@@ -223,8 +223,8 @@ if __name__ == '__main__':
         segmen.append(hasil)    
         # print("segment=%d prediksi=%s  <br>"%(idx,hasil))
         cnt+=1
-        # if cnt>100:
-        #     break
+        if cnt>1000:
+            break
     saveHistory = open(pathSaveData+FILE+".txt","w")
     saveHistory.write(str(segmen))
     saveHistory.close()
